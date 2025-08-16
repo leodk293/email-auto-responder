@@ -1,0 +1,44 @@
+{
+    "manifest_version": 3,
+    "name": "Email Auto Responder",
+    "version": "1.0",
+    "description": "Automatically respond to emails with custom templates",
+    "permissions": [
+        "activeTab",
+        "storage",
+        "scripting"
+    ],
+    "host_permissions": [
+        "https://mail.google.com/*",
+        "https://outlook.live.com/*",
+        "https://outlook.office.com/*"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "https://mail.google.com/*",
+                "https://outlook.live.com/*",
+                "https://outlook.office.com/*"
+            ],
+            "js": [ "./content.js" ],
+            "run_at": "document_end"
+        }
+    ],
+    "action": {
+        "default_popup": "index.html",
+        "default_title": "Email Auto Responder"
+    },
+    "background": {
+        "service_worker": "./background.js"
+    },
+    "web_accessible_resources": [
+        {
+            "resources": [ "injected.js" ],
+            "matches": [
+                "https://mail.google.com/*",
+                "https://outlook.live.com/*",
+                "https://outlook.office.com/*"
+            ]
+        }
+    ]
+}
